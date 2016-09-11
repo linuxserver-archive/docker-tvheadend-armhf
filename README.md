@@ -11,9 +11,11 @@ The [LinuxServer.io][linuxserverurl] team brings you another container release f
 * [Podcast][podcasturl] covers everything to do with getting the most from your Linux Server plus a focus on all things Docker and containerisation!
 
 # lsioarmhf/tvheadend
+[![](https://images.microbadger.com/badges/image/lsioarmhf/tvheadend.svg)](http://microbadger.com/images/lsioarmhf/tvheadend "Get your own image badge on microbadger.com")[![Docker Pulls](https://img.shields.io/docker/pulls/lsioarmhf/tvheadend.svg)][hub][![Docker Stars](https://img.shields.io/docker/stars/lsioarmhf/tvheadend.svg)][hub][![Build Status](http://jenkins.linuxserver.io:8080/buildStatus/icon?job=Dockers/LinuxServer.io-armhf/lsioarmhf-tvheadend)](http://jenkins.linuxserver.io:8080/job/Dockers/job/LinuxServer.io-armhf/job/lsioarmhf-tvheadend/)
+[hub]: https://hub.docker.com/r/lsioarmhf/tvheadend/
 
 
-[Tvheadend](https://www.tvheadend.org/) is a TV streaming server and recorder for Linux, FreeBSD and Android supporting DVB-S, DVB-S2, DVB-C, DVB-T, ATSC, ISDB-T, IPTV, SAT>IP and HDHomeRun as input sources.
+[Tvheadend][tvheadendurl] is a TV streaming server and recorder for Linux, FreeBSD and Android supporting DVB-S, DVB-S2, DVB-C, DVB-T, ATSC, ISDB-T, IPTV, SAT>IP and HDHomeRun as input sources.
 Tvheadend offers the HTTP (VLC, MPlayer), HTSP (Kodi, Movian) and SAT>IP streaming.
 Multiple EPG sources are supported (over-the-air DVB and ATSC including OpenTV DVB extensions, XMLTV, PyXML).
 
@@ -71,6 +73,7 @@ In this instance `PUID=1001` and `PGID=1001`. To find yours use `id user` as bel
 ```
 
 ## Setting up the application
+`IMPORTANT... THIS IS THE ARMHF VERSION`
 
 The setup depends if you run the one of the stable tags or use latest. Running latest is the easiest as it has a setup wizard.
 
@@ -106,7 +109,7 @@ Go to Configuration --> Recording. Change the view level to advanced in the top 
 comskip --ini=/config/comskip/comskip.ini "%f"
 ```
 
-Now comskip will run after each recording is finished. You will find comskip.ini in the comskip folder of your /config volume mapping. See the [Comskip] (http://www.kaashoek.com/comskip/) homepage for tuning of the ini file.
+Now comskip will run after each recording is finished. You will find comskip.ini in the comskip folder of your /config volume mapping. See the [Comskip](http://www.kaashoek.com/comskip/) homepage for tuning of the ini file.
 
 
 **FFmpeg**
