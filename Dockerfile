@@ -3,6 +3,7 @@ MAINTAINER saarg
 
 # package version
 ARG ARGTABLE_VER="2.13"
+ARG TVH_VER="v4.0.9"
 ARG UNICODE_VER="2.09"
 ARG XMLTV_VER="0.5.68"
 ARG TZ="Europe/Oslo"
@@ -20,7 +21,7 @@ RUN \
 	automake \
 	cmake \
 	coreutils \
-	ffmpeg-dev \
+	ffmpeg2.8-dev \
 	file \
 	findutils \
 	g++ \
@@ -166,6 +167,7 @@ RUN \
 # build tvheadend
  git clone https://github.com/tvheadend/tvheadend.git /tmp/tvheadend && \
  cd /tmp/tvheadend && \
+ git checkout "${TVH_VER}" && \
  ./configure \
 	--disable-ffmpeg_static \
 	--disable-hdhomerun_static \
@@ -217,16 +219,16 @@ RUN \
  git clone git://github.com/erikkaashoek/Comskip /tmp/comskip && \
  cd /tmp/comskip && \
  ./autogen.sh && \
-	./configure \
-		--bindir=/usr/bin \
-		--sysconfdir=/config/comskip && \
+ ./configure \
+	--bindir=/usr/bin \
+	--sysconfdir=/config/comskip && \
  make DEFAULT_CFLAGS="-g -O2" && \
  make install && \
 
 # install runtime packages
  apk add --no-cache \
-	ffmpeg \
-	ffmpeg-libs \
+	ffmpeg2.8 \
+	ffmpeg2.8-libs \
 	libhdhomerun-libs && \
 
 # cleanup
