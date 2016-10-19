@@ -8,6 +8,11 @@ ARG UNICODE_VER="2.09"
 ARG XMLTV_VER="0.5.68"
 ARG TZ="Europe/Oslo"
 
+# set version label
+ARG BUILD_DATE
+ARG VERSION
+LABEL build_version="Build-date:- ${BUILD_DATE}"
+
 # Environment settings
 ENV HOME="/config"
 
