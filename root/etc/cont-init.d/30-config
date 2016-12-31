@@ -14,3 +14,7 @@ mkdir -p \
 chown -R abc:abc \
 	/config \
 	/picons
+
+chmod 755 \
+	/usr/bin/tv_grab_file \
+	/usr/bin/tv_grab_wg
