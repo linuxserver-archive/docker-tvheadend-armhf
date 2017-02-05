@@ -1,4 +1,4 @@
-FROM lsiobase/alpine.armhf
+FROM lsiobase/alpine.armhf:3.5
 MAINTAINER saarg
 
 # package version
@@ -165,8 +165,8 @@ RUN \
 # build dvb-apps
  hg clone http://linuxtv.org/hg/dvb-apps /tmp/dvb-apps && \
  cd /tmp/dvb-apps && \
- make && \
- make install && \
+ make -C lib && \
+ make -C lib install && \
 
 # build tvheadend
  git clone https://github.com/tvheadend/tvheadend.git /tmp/tvheadend && \
