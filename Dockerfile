@@ -20,6 +20,8 @@ COPY patches/ /tmp/patches/
 
 # install build packages
 RUN \
+ apk add --no-cache --repository http://nl.alpinelinux.org/alpine/edge/main \
+	libxslt-dev && \
  apk add --no-cache --virtual=build-dependencies \
 	autoconf \
 	automake \
@@ -36,7 +38,6 @@ RUN \
 	libgcrypt-dev \
 	libtool \
 	libxml2-dev \
-	libxslt-dev \
 	make \
 	mercurial \
 	openssl-dev \
@@ -49,6 +50,8 @@ RUN \
 	zlib-dev && \
 
 # add runtime dependencies required in build stage
+ apk add --no-cache --repository http://nl.alpinelinux.org/alpine/edge/main \
+	libxslt && \
  apk add --no-cache \
 	bsd-compat-headers \
 	bzip2 \
