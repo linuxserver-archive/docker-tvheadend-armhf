@@ -125,7 +125,6 @@ RUN \
  cpanm HTML::Entities && \
  cpanm HTML::TableExtract && \
  cpanm HTML::TreeBuilder && \
- cpanm HTTP::Cache::Transparent && \
  cpanm inc && \
  cpanm IO::Scalar && \
  cpanm IO::Socket::SSL && \
@@ -148,6 +147,7 @@ RUN \
  cpanm XML::TreePP && \
  cpanm XML::Twig && \
  cpanm XML::Writer && \
+ cpanm HTTP::Cache::Transparent && \
 
 # patch and build perl-unicode-string
  mkdir -p \
