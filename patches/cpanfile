@@ -1,10 +1,19 @@
 requires 'perl' => '5.24.0';
 
 # perl packages for tvheadend arm
+requires 'Compress::Zlib' ;
+requires 'Data::Dumper' ;
 requires 'Date::Language' ;
 requires 'Date::Manip' ;
+requires 'DateTime' ;
 requires 'DateTime::Format::ISO8601' ;
+requires 'DateTime::Format::SQLite' ;
 requires 'DateTime::Format::Strptime' ;
+requires 'DBD::SQLite' ;
+requires 'DBI' ;
+requires 'Digest::SHA' ;
+requires 'File::HomeDir' ;
+requires 'File::Which' ;
 requires 'HTML::Entities' ;
 requires 'HTML::TableExtract' ;
 requires 'HTML::TreeBuilder' ;
@@ -19,9 +28,11 @@ requires 'List::MoreUtils' ;
 requires 'LWP::Simple' ;
 requires 'LWP::UserAgent' ;
 requires 'PerlIO::gzip' ;
+requires 'Scalar::Util' ;
 requires 'SOAP::Lite' ;
 requires 'Storable' ;
 requires 'Term::ProgressBar' ;
+requires 'Unicode::String' ;
 requires 'Unicode::UTF8simple' ;
 requires 'version' ;
 requires 'WWW::Mechanize' ;
