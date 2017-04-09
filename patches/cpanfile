@@ -1,0 +1,33 @@
+requires 'perl' => '5.24.0';
+
+# perl packages for tvheadend arm
+requires 'Date::Language' ;
+requires 'Date::Manip' ;
+requires 'DateTime::Format::ISO8601' ;
+requires 'DateTime::Format::Strptime' ;
+requires 'HTML::Entities' ;
+requires 'HTML::TableExtract' ;
+requires 'HTML::TreeBuilder' ;
+requires 'HTTP::Cache::Transparent' => ">= 1.3, != 1.4" ;
+requires 'inc' ;
+requires 'IO::Scalar' ;
+requires 'IO::Socket::SSL' ;
+requires 'JSON::PP' ;
+requires 'Lingua::EN::Numbers::Ordinate' ;
+requires 'Lingua::Preferred' ;
+requires 'List::MoreUtils' ;
+requires 'LWP::Simple' ;
+requires 'LWP::UserAgent' ;
+requires 'PerlIO::gzip' ;
+requires 'SOAP::Lite' ;
+requires 'Storable' ;
+requires 'Term::ProgressBar' ;
+requires 'Unicode::UTF8simple' ;
+requires 'version' ;
+requires 'WWW::Mechanize' ;
+requires 'XML::DOM' ;
+requires 'XML::LibXML' ;
+requires 'XML::LibXSLT' ;
+requires 'XML::TreePP' ;
+requires 'XML::Twig' ;
+requires 'XML::Writer' ;
