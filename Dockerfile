@@ -3,10 +3,10 @@ MAINTAINER saarg
 
 # package version
 ARG ARGTABLE_VER="2.13"
+ARG FFMPEG_VER="ffmpeg2.8"
 ARG TVH_VER="v4.0.9"
-ARG UNICODE_VER="2.09"
-ARG XMLTV_VER="0.5.68"
 ARG TZ="Europe/Oslo"
+ARG XMLTV_VER="0.5.69"
 
 # set version label
 ARG BUILD_DATE
@@ -19,6 +19,17 @@ ENV HOME="/config"
 # copy patches
 COPY patches/ /tmp/patches/
 
+# set version label
+ARG BUILD_DATE
+ARG VERSION
+LABEL build_version="Build-date:- ${BUILD_DATE}"
+
+# Environment settings
+ENV HOME="/config"
+
+# copy patches
+COPY patches/ /tmp/patches/
+
 # install build packages
 RUN \
  apk add --no-cache --virtual=build-dependencies \
@@ -26,7 +37,7 @@ RUN \
 	automake \
 	cmake \
 	coreutils \
-	ffmpeg2.8-dev \
+	${FFMPEG_VER}-dev \
 	file \
 	findutils \
 	g++ \
@@ -40,7 +51,7 @@ RUN \
 	libxslt-dev \
 	make \
 	mercurial \
-	openssl-dev \
+	libressl-dev \
 	patch \
 	perl-dev \
 	pkgconf \
@@ -59,17 +70,24 @@ RUN \
 	libcurl	\
 	libssl1.0 \
 	linux-headers \
-	openssl \
+	libressl \
 	perl \
 	perl-archive-zip \
 	perl-boolean \
 	perl-capture-tiny \
 	perl-cgi \
 	perl-compress-raw-zlib \
+	perl-data-dumper \
+	perl-date-manip \
 	perl-datetime \
+	perl-datetime-format-strptime \
+	perl-datetime-timezone \
+	perl-dbd-sqlite \
+	perl-dbi \
 	perl-digest-sha1 \
 	perl-file-slurp \
 	perl-file-temp \
+	perl-file-which \
 	perl-getopt-long \
 	perl-html-parser \
 	perl-html-tree \
@@ -77,42 +95,38 @@ RUN \
 	perl-io \
 	perl-io-compress \
 	perl-io-html \
+	perl-io-socket-ssl \
 	perl-io-stringy \
 	perl-json \
 	perl-libwww \
+	perl-lingua-en-numbers-ordinate \
+	perl-lingua-preferred \
+	perl-list-moreutils \
 	perl-module-build \
 	perl-module-pluggable \
 	perl-net-ssleay \
 	perl-parse-recdescent \
 	perl-path-class \
+	perl-scalar-list-utils \
+	perl-term-progressbar \
 	perl-term-readkey \
 	perl-test-exception \
 	perl-test-requires \
+	perl-timedate \
 	perl-try-tiny \
+	perl-unicode-string \
+	perl-xml-libxml \
+	perl-xml-libxslt \
 	perl-xml-parser \
 	perl-xml-sax \
+	perl-xml-treepp \
+	perl-xml-twig \
+	perl-xml-writer \
 	python \
 	tar \
 	uriparser \
 	wget \
 	zlib && \
-
-# build libiconv
- mkdir -p \
- /tmp/iconv-src && \
- curl -o \
- /tmp/iconv.tar.gz -L \
-	http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.14.tar.gz && \
- tar xf /tmp/iconv.tar.gz -C \
-	/tmp/iconv-src --strip-components=1 && \
- cd /tmp/iconv-src && \
- ./configure \
-	--prefix=/usr/local && \
- patch -p1 -i \
-	/tmp/patches/libiconv-1-fixes.patch && \
- make && \
- make install && \
- libtool --finish /usr/local/lib && \
 
 # install perl modules for xmltv
  curl -L http://cpanmin.us | perl - App::cpanminus && \
@@ -137,21 +151,22 @@ RUN \
 	WWW::Mechanize \
 	XML::DOM && \
 
-# patch and build perl-unicode-string
+# build libiconv
  mkdir -p \
-	/tmp/unicode && \
+ /tmp/iconv-src && \
  curl -o \
- /tmp/unicode-src.tar.gz -L \
-	"http://search.cpan.org/CPAN/authors/id/G/GA/GAAS/Unicode-String-${UNICODE_VER}.tar.gz" && \
- tar xzf /tmp/unicode-src.tar.gz -C \
-	/tmp/unicode --strip-components=1 && \
- cd /tmp/unicode/lib/Unicode && \
- patch -i /tmp/patches/perl-unicode.patch && \
- cd /tmp/unicode && \
- perl Makefile.PL && \
+ /tmp/iconv.tar.gz -L \
+	ftp://www.mirrorservice.org/sites/ftp.gnu.org/gnu/libiconv/libiconv-1.14.tar.gz && \
+ tar xf /tmp/iconv.tar.gz -C \
+	/tmp/iconv-src --strip-components=1 && \
+ cd /tmp/iconv-src && \
+ ./configure \
+	--prefix=/usr/local && \
+ patch -p1 -i \
+	/tmp/patches/libiconv-1-fixes.patch && \
  make && \
- make test && \
  make install && \
+ libtool --finish /usr/local/lib && \
 
 # build dvb-apps
  hg clone http://linuxtv.org/hg/dvb-apps /tmp/dvb-apps && \
@@ -195,7 +210,7 @@ RUN \
  make test && \
  make install && \
 
-# build argtable2
+# build argtable2
  ARGTABLE_VER1="${ARGTABLE_VER//./-}" && \
  mkdir -p \
 	/tmp/argtable && \
@@ -211,20 +226,20 @@ RUN \
  make check && \
  make install && \
 
-# build comskip
+# build comskip
  git clone git://github.com/erikkaashoek/Comskip /tmp/comskip && \
  cd /tmp/comskip && \
  ./autogen.sh && \
  ./configure \
 	--bindir=/usr/bin \
 	--sysconfdir=/config/comskip && \
- make DEFAULT_CFLAGS="-g -O2" && \
+ make && \
  make install && \
 
 # install runtime packages
  apk add --no-cache \
-	ffmpeg2.8 \
-	ffmpeg2.8-libs \
+	${FFMPEG_VER} \
+	${FFMPEG_VER}-libs \
 	libhdhomerun-libs \
 	libxml2 \
 	libxslt && \
