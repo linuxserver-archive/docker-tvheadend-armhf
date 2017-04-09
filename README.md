@@ -151,6 +151,7 @@ You need to enable minimum advanced view level to see the picons options.
 
 ## Versions
 
++ **09.04.2017:** Chain cpanm installs in one block and use --installdeps.
 + **07.02.2017:** Add variable to add additional runtime paramters.
 + **05.02.2017:** Update to Alpine 3.5 and change dvb-apps to only compile needed libs.
 + **15.11.2016:** Add picons from picons.xyz to /picons folder and add info to README.
