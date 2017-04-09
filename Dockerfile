@@ -1,11 +1,11 @@
 FROM lsiobase/alpine.armhf:3.5
 MAINTAINER saarg
 
-# package version
+# package version
 ARG ARGTABLE_VER="2.13"
-ARG UNICODE_VER="2.09"
-ARG XMLTV_VER="0.5.68"
+ARG FFMPEG_VER="ffmpeg"
 ARG TZ="Europe/Oslo"
+ARG XMLTV_VER="0.5.69"
 
 # set version label
 ARG BUILD_DATE
@@ -15,19 +15,28 @@ LABEL build_version="Build-date:- ${BUILD_DATE}"
 # Environment settings
 ENV HOME="/config"
 
-# copy patches
+# copy patches
+COPY patches/ /tmp/patches/
+
+# set version label
+ARG BUILD_DATE
+ARG VERSION
+LABEL build_version="Build-date:- ${BUILD_DATE}"
+
+# Environment settings
+ENV HOME="/config"
+
+# copy patches
 COPY patches/ /tmp/patches/
 
 # install build packages
 RUN \
- apk add --no-cache --repository http://nl.alpinelinux.org/alpine/edge/main \
-	libxslt-dev && \
  apk add --no-cache --virtual=build-dependencies \
 	autoconf \
 	automake \
 	cmake \
 	coreutils \
-	ffmpeg-dev \
+	${FFMPEG_VER}-dev \
 	file \
 	findutils \
 	g++ \
@@ -38,9 +47,10 @@ RUN \
 	libgcrypt-dev \
 	libtool \
 	libxml2-dev \
+	libxslt-dev \
 	make \
 	mercurial \
-	openssl-dev \
+	libressl-dev \
 	patch \
 	perl-dev \
 	pkgconf \
@@ -50,8 +60,6 @@ RUN \
 	zlib-dev && \
 
 # add runtime dependencies required in build stage
- apk add --no-cache --repository http://nl.alpinelinux.org/alpine/edge/main \
-	libxslt && \
  apk add --no-cache \
 	bsd-compat-headers \
 	bzip2 \
@@ -61,17 +69,24 @@ RUN \
 	libcurl	\
 	libssl1.0 \
 	linux-headers \
-	openssl \
+	libressl \
 	perl \
 	perl-archive-zip \
 	perl-boolean \
 	perl-capture-tiny \
 	perl-cgi \
 	perl-compress-raw-zlib \
+	perl-data-dumper \
+	perl-date-manip \
 	perl-datetime \
+	perl-datetime-format-strptime \
+	perl-datetime-timezone \
+	perl-dbd-sqlite \
+	perl-dbi \
 	perl-digest-sha1 \
 	perl-file-slurp \
 	perl-file-temp \
+	perl-file-which \
 	perl-getopt-long \
 	perl-html-parser \
 	perl-html-tree \
@@ -79,27 +94,44 @@ RUN \
 	perl-io \
 	perl-io-compress \
 	perl-io-html \
+	perl-io-socket-ssl \
 	perl-io-stringy \
 	perl-json \
 	perl-libwww \
+	perl-lingua-en-numbers-ordinate \
+	perl-lingua-preferred \
+	perl-list-moreutils \
 	perl-module-build \
 	perl-module-pluggable \
 	perl-net-ssleay \
 	perl-parse-recdescent \
 	perl-path-class \
+	perl-scalar-list-utils \
+	perl-term-progressbar \
 	perl-term-readkey \
 	perl-test-exception \
 	perl-test-requires \
+	perl-timedate \
 	perl-try-tiny \
+	perl-unicode-string \
+	perl-xml-libxml \
+	perl-xml-libxslt \
 	perl-xml-parser \
 	perl-xml-sax \
+	perl-xml-treepp \
+	perl-xml-twig \
+	perl-xml-writer \
 	python \
 	tar \
 	uriparser \
 	wget \
 	zlib && \
 
-# build libiconv
+# install perl modules for xmltv
+ curl -L http://cpanmin.us | perl - App::cpanminus && \
+ cpanm --installdeps /tmp/patches && \
+
+# build libiconv
  mkdir -p \
  /tmp/iconv-src && \
  curl -o \
@@ -115,55 +147,6 @@ RUN \
  make && \
  make install && \
  libtool --finish /usr/local/lib && \
-
-# install perl modules
- curl -L http://cpanmin.us | perl - App::cpanminus && \
- cpanm Date::Language && \
- cpanm Date::Manip && \
- cpanm DateTime::Format::ISO8601 && \
- cpanm DateTime::Format::Strptime && \
- cpanm HTML::Entities && \
- cpanm HTML::TableExtract && \
- cpanm HTML::TreeBuilder && \
- cpanm inc && \
- cpanm IO::Scalar && \
- cpanm IO::Socket::SSL && \
- cpanm JSON::PP && \
- cpanm Lingua::EN::Numbers::Ordinate && \
- cpanm Lingua::Preferred && \
- cpanm List::MoreUtils && \
- cpanm LWP::Simple && \
- cpanm LWP::UserAgent && \
- cpanm PerlIO::gzip && \
- cpanm SOAP::Lite && \
- cpanm Storable && \
- cpanm Term::ProgressBar && \
- cpanm Unicode::UTF8simple && \
- cpanm version && \
- cpanm WWW::Mechanize && \
- cpanm XML::DOM && \
- cpanm XML::LibXML && \
- cpanm XML::LibXSLT && \
- cpanm XML::TreePP && \
- cpanm XML::Twig && \
- cpanm XML::Writer && \
- cpanm HTTP::Cache::Transparent && \
-
-# patch and build perl-unicode-string
- mkdir -p \
-	/tmp/unicode && \
- curl -o \
- /tmp/unicode-src.tar.gz -L \
-	"http://search.cpan.org/CPAN/authors/id/G/GA/GAAS/Unicode-String-${UNICODE_VER}.tar.gz" && \
- tar xzf /tmp/unicode-src.tar.gz -C \
-	/tmp/unicode --strip-components=1 && \
- cd /tmp/unicode/lib/Unicode && \
- patch -i /tmp/patches/perl-unicode.patch && \
- cd /tmp/unicode && \
- perl Makefile.PL && \
- make && \
- make test && \
- make install && \
 
 # build dvb-apps
  hg clone http://linuxtv.org/hg/dvb-apps /tmp/dvb-apps && \
@@ -205,7 +188,7 @@ RUN \
  make test && \
  make install && \
 
-# build argtable2
+# build argtable2
  ARGTABLE_VER1="${ARGTABLE_VER//./-}" && \
  mkdir -p \
 	/tmp/argtable && \
@@ -221,20 +204,20 @@ RUN \
  make check && \
  make install && \
 
-# build comskip
+# build comskip
  git clone git://github.com/erikkaashoek/Comskip /tmp/comskip && \
  cd /tmp/comskip && \
  ./autogen.sh && \
-	./configure \
-		--bindir=/usr/bin \
-		--sysconfdir=/config/comskip && \
- make DEFAULT_CFLAGS="-g -O2" && \
+ ./configure \
+	--bindir=/usr/bin \
+	--sysconfdir=/config/comskip && \
+ make && \
  make install && \
 
 # install runtime packages
  apk add --no-cache \
-	ffmpeg \
-	ffmpeg-libs \
+	${FFMPEG_VER} \
+	${FFMPEG_VER}-libs \
 	libhdhomerun-libs \
 	libxml2 \
 	libxslt && \
