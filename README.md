@@ -46,7 +46,8 @@ Add one of the tags, if required, to the linuxserver/tvheadend line of the run/c
 
 #### Tags
 
-+ **stable-4.0.9** : latest stable version.
++ **stable-4.2.1** : latest stable version.
++ **stable-4.0.9** : old stable version. Will not be updated anymore!
 
 #### Host vs. Bridge
 
@@ -151,6 +152,7 @@ You need to enable minimum advanced view level to see the picons options.
 
 ## Versions
 
++ **01.05.2017:** Update to tvheadend 4.2.1 stable.
 + **09.04.2017:** Chain cpanm installs in one block and use --installdeps.
 + **07.02.2017:** Add variable to add additional runtime paramters.
 + **05.02.2017:** Update to Alpine 3.5 and change dvb-apps to only compile needed libs.
