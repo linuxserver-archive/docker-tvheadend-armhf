@@ -13,8 +13,7 @@ The [LinuxServer.io][linuxserverurl] team brings you another container release f
 * [Podcast][podcasturl] covers everything to do with getting the most from your Linux Server plus a focus on all things Docker and containerisation!
 
 # lsioarmhf/tvheadend
-[![](https://images.microbadger.com/badges/image/lsioarmhf/tvheadend.svg)](http://microbadger.com/images/lsioarmhf/tvheadend "Get your own image badge on microbadger.com")[![Docker Pulls](https://img.shields.io/docker/pulls/lsioarmhf/tvheadend.svg)][hub][![Docker Stars](https://img.shields.io/docker/stars/lsioarmhf/tvheadend.svg)][hub][![Build Status](http://jenkins.linuxserver.io:8080/buildStatus/icon?job=Dockers/LinuxServer.io-armhf/lsioarmhf-tvheadend)](http://jenkins.linuxserver.io:8080/job/Dockers/job/LinuxServer.io-armhf/job/lsioarmhf-tvheadend/)
-
+[![](https://images.microbadger.com/badges/version/lsioarmhf/tvheadend.svg)](https://microbadger.com/images/lsioarmhf/tvheadend "Get your own version badge on microbadger.com")[![](https://images.microbadger.com/badges/image/lsioarmhf/tvheadend.svg)](https://microbadger.com/images/lsioarmhf/tvheadend "Get your own image badge on microbadger.com")[![Docker Pulls](https://img.shields.io/docker/pulls/lsioarmhf/tvheadend.svg)][hub][![Docker Stars](https://img.shields.io/docker/stars/lsioarmhf/tvheadend.svg)][hub][![Build Status](http://jenkins.linuxserver.io:8080/buildStatus/icon?job=Dockers/LinuxServer.io-armhf/lsioarmhf-tvheadend)](http://jenkins.linuxserver.io:8080/job/Dockers/job/LinuxServer.io-armhf/job/lsioarmhf-tvheadend/)
 
 [Tvheadend][appurl] is a TV streaming server and recorder for Linux, FreeBSD and Android supporting DVB-S, DVB-S2, DVB-C, DVB-T, ATSC, ISDB-T, IPTV, SAT>IP and HDHomeRun as input sources.
 Tvheadend offers the HTTP (VLC, MPlayer), HTSP (Kodi, Movian) and SAT>IP streaming.
@@ -42,11 +41,12 @@ The --device=/dev/dvb is only needed if you want to pass through a DVB card to t
 
 You can choose between ,using tags, latest (default, and no tag required or a specific stable version of tvheadend.
 
-Add one of the tags, if required, to the linuxserver/tvheadend line of the run/create command in the following format, linuxserver/tvheadend:stable-4.0.9
+Add one of the tags, if required, to the linuxserver/tvheadend line of the run/create command in the following format, linuxserver/tvheadend:stable-4.2.1
 
 #### Tags
 
-+ **stable-4.0.9** : latest stable version.
++ **stable-4.2.1** : latest stable version.
++ **stable-4.0.9** : old stable version. Will not be updated anymore!
 
 #### Host vs. Bridge
 
@@ -151,6 +151,7 @@ You need to enable minimum advanced view level to see the picons options.
 
 ## Versions
 
++ **01.05.2017:** Update to tvheadend 4.2.1 stable.
 + **09.04.2017:** Chain cpanm installs in one block and use --installdeps.
 + **07.02.2017:** Add variable to add additional runtime paramters.
 + **05.02.2017:** Update to Alpine 3.5 and change dvb-apps to only compile needed libs.
