@@ -3,7 +3,7 @@
 [ircurl]: https://www.linuxserver.io/irc/
 [podcasturl]: https://www.linuxserver.io/podcast/
 [appurl]: https://www.tvheadend.org/
-[hub]: https://hub.docker.com/r/lsioarmhf/tvheadend/
+[hub]: https://hub.docker.com/r/lsioarmhf/tvheadend-aarch64/
 
 [![linuxserver.io](https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/linuxserver_medium.png)][linuxserverurl]
 
@@ -12,11 +12,10 @@ The [LinuxServer.io][linuxserverurl] team brings you another container release f
 * [IRC][ircurl] on freenode at `#linuxserver.io`
 * [Podcast][podcasturl] covers everything to do with getting the most from your Linux Server plus a focus on all things Docker and containerisation!
 
-# lsioarmhf/tvheadend
-[![](https://images.microbadger.com/badges/image/lsioarmhf/tvheadend.svg)](http://microbadger.com/images/lsioarmhf/tvheadend "Get your own image badge on microbadger.com")[![Docker Pulls](https://img.shields.io/docker/pulls/lsioarmhf/tvheadend.svg)][hub][![Docker Stars](https://img.shields.io/docker/stars/lsioarmhf/tvheadend.svg)][hub][![Build Status](http://jenkins.linuxserver.io:8080/buildStatus/icon?job=Dockers/LinuxServer.io-armhf/lsioarmhf-tvheadend)](http://jenkins.linuxserver.io:8080/job/Dockers/job/LinuxServer.io-armhf/job/lsioarmhf-tvheadend/)
+# lsioarmhf/tvheadend-aarch64
+[![](https://images.microbadger.com/badges/version/lsioarmhf/tvheadend-aarch64.svg)](https://microbadger.com/images/lsioarmhf/tvheadend-aarch64 "Get your own version badge on microbadger.com")[![](https://images.microbadger.com/badges/image/lsioarmhf/tvheadend-aarch64.svg)](http://microbadger.com/images/lsioarmhf/tvheadend-aarch64 "Get your own image badge on microbadger.com")[![Docker Pulls](https://img.shields.io/docker/pulls/lsioarmhf/tvheadend-aarch64.svg)][hub][![Docker Stars](https://img.shields.io/docker/stars/lsioarmhf/tvheadend-aarch64.svg)][hub][![Build Status](http://jenkins.linuxserver.io:8080/buildStatus/icon?job=Dockers/LinuxServer.io-arm64/lsioarm64-tvheadend)](http://jenkins.linuxserver.io:8080/job/Dockers/job/LinuxServer.io-arm64/job/lsioarm64-tvheadend/)
 
-
-[Tvheadend][appurl] is a TV streaming server and recorder for Linux, FreeBSD and Android supporting DVB-S, DVB-S2, DVB-C, DVB-T, ATSC, ISDB-T, IPTV, SAT>IP and HDHomeRun as input sources.
+[Tvheadend](https://www.tvheadend.org/) is a TV streaming server and recorder for Linux, FreeBSD and Android supporting DVB-S, DVB-S2, DVB-C, DVB-T, ATSC, ISDB-T, IPTV, SAT>IP and HDHomeRun as input sources.
 Tvheadend offers the HTTP (VLC, MPlayer), HTSP (Kodi, Movian) and SAT>IP streaming.
 Multiple EPG sources are supported (over-the-air DVB and ATSC including OpenTV DVB extensions, XMLTV, PyXML).
 
@@ -35,18 +34,19 @@ docker create \
   -p 9981:9981 \
   -p 9982:9982 \
   --device=/dev/dvb
-  lsioarmhf/tvheadend
+  lsioarmhf/tvheadend-aarch64
 ```
 The --device=/dev/dvb is only needed if you want to pass through a DVB card to the container. If you use IPTV or HDHomeRun you can leave it out.
 
 
 You can choose between ,using tags, latest (default, and no tag required or a specific stable version of tvheadend.
 
-Add one of the tags, if required, to the linuxserver/tvheadend line of the run/create command in the following format, linuxserver/tvheadend:stable-4.0.9
+Add one of the tags, if required, to the lsioarmhf/tvheadend-aarch64 line of the run/create command in the following format, lsioarmhf/tvheadend-aarch64:stable-4.2.1
 
 #### Tags
 
-+ **stable-4.0.9** : latest stable version.
++ **stable-4.2.1** : latest stable version.
++ **stable-4.0.9** : old stable version. Will not be updated anymore!
 
 #### Host vs. Bridge
 
@@ -87,8 +87,9 @@ In this instance `PUID=1001` and `PGID=1001`. To find yours use `id user` as bel
 
 In some cases it might be necessary to start tvheadend with additional parameters, for example to enable debugging or specify webroot for reverse proxy. Be sure to have the right parameters set, as adding the wrong once might lead to the container not starting correctly.
 
+
 ## Setting up the application
-`IMPORTANT... THIS IS THE ARMHF VERSION`
+`IMPORTANT... THIS IS THE ARM64 VERSION`
 
 The setup depends if you run the one of the stable tags or use latest. Running latest is the easiest as it has a setup wizard.
 
@@ -151,9 +152,5 @@ You need to enable minimum advanced view level to see the picons options.
 
 ## Versions
 
-+ **09.04.2017:** Chain cpanm installs in one block and use --installdeps.
-+ **07.02.2017:** Add variable to add additional runtime paramters.
-+ **05.02.2017:** Update to Alpine 3.5 and change dvb-apps to only compile needed libs.
-+ **15.11.2016:** Add picons from picons.xyz to /picons folder and add info to README.
-+ **22.09.2016:** Fix broken tv_grab_wg, libs for xmltv and update README.
-+ **11.09.2016:** Initial release.
++ **01.05.2017:** Update to tvheadend 4.2.1 stable.
++ **18.04.2017:** Initial Release.
