@@ -1,9 +1,8 @@
-FROM lsiobase/alpine.armhf:3.5
+FROM lsiobase/alpine.armhf:3.6
 MAINTAINER saarg
 
 # package version
 ARG ARGTABLE_VER="2.13"
-ARG FFMPEG_VER="ffmpeg"
 ARG TZ="Europe/Oslo"
 ARG XMLTV_VER="0.5.69"
 
@@ -12,18 +11,7 @@ ARG BUILD_DATE
 ARG VERSION
 LABEL build_version="Build-date:- ${BUILD_DATE}"
 
-# Environment settings
-ENV HOME="/config"
-
-# copy patches
-COPY patches/ /tmp/patches/
-
-# set version label
-ARG BUILD_DATE
-ARG VERSION
-LABEL build_version="Build-date:- ${BUILD_DATE}"
-
-# Environment settings
+# environment settings
 ENV HOME="/config"
 
 # copy patches
@@ -36,7 +24,7 @@ RUN \
 	automake \
 	cmake \
 	coreutils \
-	${FFMPEG_VER}-dev \
+	ffmpeg-dev \
 	file \
 	findutils \
 	g++ \
@@ -52,12 +40,16 @@ RUN \
 	mercurial \
 	libressl-dev \
 	patch \
+	pcre2-dev \
 	perl-dev \
 	pkgconf \
 	sdl-dev \
 	uriparser-dev \
 	wget \
 	zlib-dev && \
+ apk add --no-cache --virtual=build-dependencies \
+	--repository http://nl.alpinelinux.org/alpine/edge/testing \
+	gnu-libiconv-dev && \
 
 # add runtime dependencies required in build stage
  apk add --no-cache \
@@ -67,9 +59,10 @@ RUN \
 	gzip \
 	libcrypto1.0 \
 	libcurl	\
+	libressl \
 	libssl1.0 \
 	linux-headers \
-	libressl \
+	pcre2 \
 	perl \
 	perl-archive-zip \
 	perl-boolean \
@@ -84,6 +77,7 @@ RUN \
 	perl-dbd-sqlite \
 	perl-dbi \
 	perl-digest-sha1 \
+	perl-doc \
 	perl-file-slurp \
 	perl-file-temp \
 	perl-file-which \
@@ -130,23 +124,6 @@ RUN \
 # install perl modules for xmltv
  curl -L http://cpanmin.us | perl - App::cpanminus && \
  cpanm --installdeps /tmp/patches && \
-
-# build libiconv
- mkdir -p \
- /tmp/iconv-src && \
- curl -o \
- /tmp/iconv.tar.gz -L \
-	ftp://www.mirrorservice.org/sites/ftp.gnu.org/gnu/libiconv/libiconv-1.14.tar.gz && \
- tar xf /tmp/iconv.tar.gz -C \
-	/tmp/iconv-src --strip-components=1 && \
- cd /tmp/iconv-src && \
- ./configure \
-	--prefix=/usr/local && \
- patch -p1 -i \
-	/tmp/patches/libiconv-1-fixes.patch && \
- make && \
- make install && \
- libtool --finish /usr/local/lib && \
 
 # build dvb-apps
  hg clone http://linuxtv.org/hg/dvb-apps /tmp/dvb-apps && \
@@ -216,11 +193,14 @@ RUN \
 
 # install runtime packages
  apk add --no-cache \
-	${FFMPEG_VER} \
-	${FFMPEG_VER}-libs \
+	ffmpeg \
+	ffmpeg-libs \
 	libhdhomerun-libs \
 	libxml2 \
 	libxslt && \
+ apk add --no-cache \
+	--repository http://nl.alpinelinux.org/alpine/edge/testing \
+	gnu-libiconv && \
 
 # cleanup
  apk del --purge \
