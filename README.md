@@ -13,7 +13,7 @@ The [LinuxServer.io][linuxserverurl] team brings you another container release f
 * [Podcast][podcasturl] covers everything to do with getting the most from your Linux Server plus a focus on all things Docker and containerisation!
 
 # lsioarmhf/tvheadend
-[![](https://images.microbadger.com/badges/version/lsioarmhf/tvheadend.svg)](https://microbadger.com/images/lsioarmhf/tvheadend "Get your own version badge on microbadger.com")[![](https://images.microbadger.com/badges/image/lsioarmhf/tvheadend.svg)](https://microbadger.com/images/lsioarmhf/tvheadend "Get your own image badge on microbadger.com")[![Docker Pulls](https://img.shields.io/docker/pulls/lsioarmhf/tvheadend.svg)][hub][![Docker Stars](https://img.shields.io/docker/stars/lsioarmhf/tvheadend.svg)][hub][![Build Status](http://jenkins.linuxserver.io:8080/buildStatus/icon?job=Dockers/LinuxServer.io-armhf/lsioarmhf-tvheadend)](http://jenkins.linuxserver.io:8080/job/Dockers/job/LinuxServer.io-armhf/job/lsioarmhf-tvheadend/)
+[![](https://images.microbadger.com/badges/version/lsioarmhf/tvheadend.svg)](https://microbadger.com/images/lsioarmhf/tvheadend "Get your own version badge on microbadger.com")[![](https://images.microbadger.com/badges/image/lsioarmhf/tvheadend.svg)](https://microbadger.com/images/lsioarmhf/tvheadend "Get your own image badge on microbadger.com")[![Docker Pulls](https://img.shields.io/docker/pulls/lsioarmhf/tvheadend.svg)][hub][![Docker Stars](https://img.shields.io/docker/stars/lsioarmhf/tvheadend.svg)][hub][![Build Status](https://ci.linuxserver.io/buildStatus/icon?job=Docker-Builders/armhf/armhf-tvheadend)](https://ci.linuxserver.io/job/Docker-Builders/job/armhf/job/armhf-tvheadend/)
 
 [Tvheadend][appurl] is a TV streaming server and recorder for Linux, FreeBSD and Android supporting DVB-S, DVB-S2, DVB-C, DVB-T, ATSC, ISDB-T, IPTV, SAT>IP and HDHomeRun as input sources.
 Tvheadend offers the HTTP (VLC, MPlayer), HTSP (Kodi, Movian) and SAT>IP streaming.
@@ -41,7 +41,7 @@ The --device=/dev/dvb is only needed if you want to pass through a DVB card to t
 
 You can choose between ,using tags, latest (default, and no tag required or a specific release branch of tvheadend.
 
-Add one of the tags, if required, to the linuxserver/tvheadend line of the run/create command in the following format, linuxserver/tvheadend:stable-4.2
+Add one of the tags, if required, to the linuxserver/tvheadend line of the run/create command in the following format, linuxserver/tvheadend:release-4.2
 
 #### Tags
 
