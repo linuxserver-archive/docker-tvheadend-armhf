@@ -152,6 +152,7 @@ You need to enable minimum advanced view level to see the picons options.
 
 ## Versions
 
++ **13.07.2017:** Increase uniformity across all archs.
 + **09.07.2017:** Update README with full path for comskip.
 + **03.07.2017:** Move to one branch for all 4.2 releases.
 + **29.05.2017:** Rebase to alpine 3.6.
