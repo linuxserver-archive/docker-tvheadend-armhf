@@ -140,15 +140,16 @@ RUN \
  echo "**** install perl modules for xmltv ****" && \
  curl -L http://cpanmin.us | perl - App::cpanminus && \
  cpanm --installdeps /tmp/patches && \
- echo "**** build dvb-apps ****" && \
- hg clone http://linuxtv.org/hg/dvb-apps /tmp/dvb-apps && \
- cd /tmp/dvb-apps && \
- make -C lib && \
- make -C lib install && \
+ echo "**** remove musl iconv.h and replace with gnu-iconv.h ****" && \
+ rm -rf /usr/include/iconv.h && \
+ cp /usr/include/gnu-libiconv/iconv.h /usr/include/iconv.h && \
  echo "**** build tvheadend ****" && \
  git clone https://github.com/tvheadend/tvheadend.git /tmp/tvheadend && \
  cd /tmp/tvheadend && \
  ./configure \
+	--disable-avahi \
+	--disable-bintray_cache \
+	--disable-dbus_1 \
 	--disable-ffmpeg_static \
 	--disable-hdhomerun_static \
 	--disable-libfdkaac_static \
@@ -160,6 +161,7 @@ RUN \
 	--disable-libx265_static \
 	--enable-hdhomerun_client \
 	--enable-libav \
+	--enable-pngquant \
 	--infodir=/usr/share/info \
 	--localstatedir=/var \
 	--mandir=/usr/share/man \
