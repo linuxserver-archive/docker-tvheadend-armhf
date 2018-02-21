@@ -152,14 +152,15 @@ You need to enable minimum advanced view level to see the picons options.
 
 ## Versions
 
-+ **13.07.2017:** Increase uniformity across all archs.
-+ **09.07.2017:** Update README with full path for comskip.
-+ **03.07.2017:** Move to one branch for all 4.2 releases.
-+ **29.05.2017:** Rebase to alpine 3.6.
-+ **01.05.2017:** Update to tvheadend 4.2.1 stable.
-+ **09.04.2017:** Chain cpanm installs in one block and use --installdeps.
-+ **07.02.2017:** Add variable to add additional runtime paramters.
-+ **05.02.2017:** Update to Alpine 3.5 and change dvb-apps to only compile needed libs.
-+ **15.11.2016:** Add picons from picons.xyz to /picons folder and add info to README.
-+ **22.09.2016:** Fix broken tv_grab_wg, libs for xmltv and update README.
-+ **11.09.2016:** Initial release
++ **21.02.18:** Fix wrong version of iconv used, remove old patch and add some build options from CvH.
++ **13.07.17:** Increase uniformity across all archs.
++ **09.07.17:** Update README with full path for comskip.
++ **03.07.17:** Move to one branch for all 4.2 releases.
++ **29.05.17:** Rebase to alpine 3.6.
++ **01.05.17:** Update to tvheadend 4.2.1 stable.
++ **09.04.17:** Chain cpanm installs in one block and use --installdeps.
++ **07.02.17:** Add variable to add additional runtime paramters.
++ **05.02.17:** Update to Alpine 3.5 and change dvb-apps to only compile needed libs.
++ **15.11.16:** Add picons from picons.xyz to /picons folder and add info to README.
++ **22.09.16:** Fix broken tv_grab_wg, libs for xmltv and update README.
++ **11.09.16:** Initial release
