@@ -152,6 +152,7 @@ You need to enable minimum advanced view level to see the picons options.
 
 ## Versions
 
++ **22.02.18:** Add missing pngquant package.
 + **21.02.18:** Fix wrong version of iconv used, remove old patch and add some build options from CvH.
 + **13.07.17:** Increase uniformity across all archs.
 + **09.07.17:** Update README with full path for comskip.
