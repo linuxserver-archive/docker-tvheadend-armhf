@@ -33,6 +33,7 @@ RUN \
 	gcc \
 	gettext-dev \
 	git \
+	libdvbcsa-dev \
 	libgcrypt-dev \
 	libhdhomerun-dev \
 	libressl-dev \
@@ -66,7 +67,8 @@ RUN \
 	ffmpeg-libs \
 	gzip \
 	libcrypto1.0 \
-	libcurl	\
+	libcurl \
+	libdvbcsa \
 	libhdhomerun-libs \
 	libressl \
 	libssl1.0 \
