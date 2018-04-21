@@ -22,6 +22,7 @@ requires 'inc' ;
 requires 'IO::Scalar' ;
 requires 'IO::Socket::SSL' ;
 requires 'JSON::PP' ;
+requires 'JSON::XS' ;
 requires 'Lingua::EN::Numbers::Ordinate' ;
 requires 'Lingua::Preferred' ;
 requires 'List::MoreUtils' ;
