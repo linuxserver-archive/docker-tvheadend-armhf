@@ -5,7 +5,7 @@
 [appurl]: https://www.tvheadend.org/
 [hub]: https://hub.docker.com/r/lsioarmhf/tvheadend/
 
-THIS IMAGE IS DEPRECATED. PLEASE USE THE MULTI-ARCH IMAGES AT `linuxserver/tvheadend
+THIS IMAGE IS DEPRECATED. PLEASE USE THE MULTI-ARCH IMAGES AT `linuxserver/tvheadend`
 
 [![linuxserver.io](https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/linuxserver_medium.png)][linuxserverurl]
 
